@@ -20,8 +20,6 @@
 *
 ********************************************************************************/
 
-
-#include <Streaming.h>
 #include <Arduino.h>
 #include <SPI.h>
 
@@ -49,11 +47,12 @@ void setup() {
   delay(100);
 
   // Init BMI160 (accelerometer)
-  imuBMI160();
+  initBMI160();
 
-  delay(500);
-  // Print the chip ID
-  Serial << "Chip ID: " << imuGetChipId() << endl;
+  delay(1500);
+  
+  // say hello
+  Serial.println(">> okinesio - activity tracking module <<\n");
 }
 
 void loop()
@@ -62,9 +61,14 @@ void loop()
   imuGetAccelData(&acc);
   
   // Print accelerometer data (X, Y and Z)
-  Serial << "ACC:\t" << acc.x << "\t" << acc.y <<  "\t" << acc.z << "\t\t";
-  
+  Serial.print("ACC:\t");
+  Serial.print(acc.x);
+  Serial.print("\t");
+  Serial.print(acc.y);
+  Serial.print("\t");
+  Serial.print(acc.z);
+  Serial.println("\t\t");
   
   // Delay for better readability of serial monitor
-  delay(100);
+  delay(50);
 }

@@ -1,5 +1,5 @@
 /********************************************************************************
-* 
+*
 * Sample code to get the accelerometer data (X,Y and Z) from the sensor.
 * Copyright (C) 2016 okinesio
 * http://okinesio.org
@@ -20,12 +20,10 @@
 *
 ********************************************************************************/
 
-
-#include <Streaming.h>
 #include <Arduino.h>
 #include <SPI.h>
 
-int16_t slaveSelectPin = 17; // pin 17 is used 
+int16_t slaveSelectPin = 17; // pin 17 is used
 
 struct accelData {
   int16_t x;
@@ -49,27 +47,29 @@ void setup() {
   delay(100);
 
   // Init BMI160 (accelerometer)
-  imuBMI160();
+  initBMI160();
 
-  delay(500);
-  // Print the chip ID
-  Serial << "Chip ID: " << imuGetChipId() << endl;
+  delay(1500);
+
+  // say hello
+  Serial.println(">> okinesio - activity tracking module <<\n");
 }
 
 void loop()
 {
   // Get current steps
-  Serial << "STEPS:\t" << getStepCount() << endl;
+  Serial.print("STEPS:\t");
+  Serial.println(getStepCount());
 
-  
   // Get current step count (updates only if a step is counted)
   /*
   if (c != getStepCount()) {
-    Serial << "STEPS:\t" << getStepCount() << endl;
-    c = getStepCount();
+     Serial.print("STEPS:\t");
+     Serial.println(getStepCount());
+     c = getStepCount();
   }
   */
-  
+
   // Delay for better readability of serial monitor
   delay(100);
 }
